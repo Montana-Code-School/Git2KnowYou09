@@ -9,4 +9,6 @@ var port = process.env.PORT || "3000";
 
 app.use('/', express.static(path.join(__dirname, 'public')));
 
+app.use('/kate', express.static(path.join(__dirname, 'public/kate')));
+
 app.listen(port, function() {console.log("port 3k")});
