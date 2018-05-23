@@ -1,0 +1,13 @@
+body{
+  background-color: orange;
+}
+
+#drop {
+  display: none;
+}
+
+button.dropbtn {
+  padding: 0.2rem;
+  background-color: blue;
+  color: white;
+}
