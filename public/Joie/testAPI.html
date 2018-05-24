@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Dumb Gender Binary Site</title>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">
+    </script>
+  </head>
+  <body>
+    <h1>Hello World</h1>
+    <img src='https://ih1.redbubble.net/image.193013631.0462/flat,1000x1000,075,f.jpg' width= "150" height="200">
+    <input type="text" name="search1" value="">
+    <button id="srchButton" type="button" name="button"></button>
+    <div id="stuff">
+    </div>
+  </body>
+  <script type="text/javascript">
+    $('#srchButton').click(function() {
+      var s1 = $( "input[name='search1']").val();
+      var searchUrl = 'https://gender-api.com/get?name=elizabeth&key=LEreGlZoMylsKHlJZC' + s1;
+      $.ajax({
+        url : searchUrl,
+        success : function(data) {
+           data.hits.map(function(v){
+             var html = '<img src="' + v.webformatURL + '" alt="">';
+             $("#stuff").append(html);
+             console.log(result);
+           });
+        },
+        error : function(request,err) {
+            console.log(err);
+        }
+      });
+    })
+  </script>
+</html>
+<!-- <!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Gender Binary Test</title>
+  </head>
+  <body>
+    <h1>Welcome to the End</h1>
+    <input type="text" name="search1" value="">
+    <button id="srchButton" type="button" name="button"></button>
+  </body>
+  <script>
+    $.ajax({
+      url:"https://gender-api.com/get?name=elizabeth&key=LEreGlZoMylsKHlJZC",
+      type: "POST"
+    });
+  </script>
+</html> -->
