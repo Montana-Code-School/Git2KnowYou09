@@ -1,3 +1,16 @@
-body {
+.body {
   background-color: pink;
+
+}
+
+.stuff {
+  width: 120rem;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  margin-top: 5rem;
+  margin-top: 5rem;
+}
+
+.srchButton {
+
 }
