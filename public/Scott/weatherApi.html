@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+<body>
+
+<button>Get JSON data</button>
+
+<div id="weatherdata"></div>
+<script>
+
+var searchUrl = "http://api.openweathermap.org/data/2.5/forecast?id=524901&APPID=d1b6322ad23b38c5b2a7a5b787ed10ab";
+$(document).ready(function(){
+    $("button").click(function(){
+        $.getJSON(searchUrl, function(result){
+            var html = '';
+            // result.city.coords.lat Longitude
+            // result.city.coords.lon Latitude
+            // result.list   this is an array of temps based on time
+          html += '<div><h3>' + result.city.name + '</h3></br>'
+          html += '<em>Latitude : ' + result.city.coord.lat + '</em></br>'
+          html += '<em>Longitude : ' + result.city.coord.lon + '</em>';
+          html += '<ul>';
+          result.list.map(function(d) {
+              html += '<li>The humidity on ' + d.dt_txt + ' was ' + d.main.humidity + '</li>';
+          })
+          html += '</ul>';
+            $('#weatherdata').append(html);
+            console.log(result);
+        });
+    });
+});
+</script>
+
+
+</body>
+</html>
