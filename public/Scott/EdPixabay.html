@@ -1,39 +1,44 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.min.js"
-      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-      crossorigin="anonymous">
-    </script>
-  </head>
-  <body>
-    <h1>Hello World</h1>
-    <input type="text" name="search1" value="">
-    <input type="text" name="search2" value="">
-    <button id="srchButton" type="button" name="button"></button>
-    <div id="stuff">
-    </div>
-  </body>
-  <script type="text/javascript">
-    $('#srchButton').click(function() {
-      var s1 = $( "input[name='search1']").val();
-      var s2 = $( "input[name='search2']").val();
-      var searchUrl = 'https://pixabay.com/api/?key=9085406-e998333c4f260df7776f5c923&q=' + s1 + '+' + s2 + '&image_type=photo';
-      $.ajax({
-        url : searchUrl,
-        success : function(data) {
-           data.hits.map(function(v){
-             var html = '<img src="' + v.webformatURL + '" alt="">';
-             $("#stuff").append(html);
-           });
-        },
-        error : function(request,err) {
-            console.log(err)
-        }
-      });
-    })
+
+<head>
+
+  <meta charset="utf-8">
+  <title></title>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
   </script>
+  
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <h1>Hello World</h1>
+  <input type="text" name="search1" value="">
+  <input type="text" name="search2" value="">
+  <button id="srchButton" type="button" name="button"></button>
+  <div id="stuff">
+  </div>
+</body>
+<script type="text/javascript">
+  $('#srchButton').click(function() {
+    var s1 = $("input[name='search1']").val();
+    var s2 = $("input[name='search2']").val();
+    var searchUrl = 'https://pixabay.com/api/?key=9085406-e998333c4f260df7776f5c923&q=' + s1 + '+' + s2 + '&image_type=photo';
+    $.ajax({
+      url: searchUrl,
+
+      success: function(data) {
+        data.hits.map(function(v) {
+          var html = '<img src="' + v.webformatURL + '" alt="">';
+          $("#stuff").append(html);
+        });
+      },
+      error: function(request, err) {
+        console.log(err)
+      }
+    });
+
+  })
+</script>
+
 </html>

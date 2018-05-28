@@ -2,68 +2,55 @@
 <html>
 
 <head>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link href="jumbotron-narrow.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
-  <style media="screen">
-    body>nav {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .nav-items {
-      margin: 12px;
-    }
-  </style>
 </head>
 
 <body>
-  <nav class="">
-    <a class="nav-items">Weather Search Site by US Zip Code: </a>
-    <input class="nav-items" type="text" value="59801" name="zipI" placeholder="Enter US Zip Code" aria-label="Search">
-    <button class="nav-items btn btn-primary" name="button" type="submit">Search</button>
 
-  </nav>
-  <div id="zipcode-alert" class="alert alert-danger" role="alert">
-    Zip Code must be 5 digits long!
-  </div>
-  <div id="weatherdata">
+  <!-- <input type="text" name="zip" value="">
+  <button id="weatherdata" type="button" name="button"></button>
+  <div id="stuff">
   </div>
 
+  <script type="text/javascript">
+  $('#srchButton').click(function() {
+    var zip = $("input[name='search1']").val(); -->
+
+
+
+
+
+
+  <button>Get City Weather JSON data</button>
+  <div id="weatherdata"></div>
   <script>
-    $(document).ready(function() {
-      $("#zipcode-alert").hide();
-    })
 
-    function getWeathers() {
-
-      var html = '';
-      var zip = $("input[name='zipI']").val();
-      var superZip = zip.replace(/\D+/g, '');
-      var searchUrl = "http://api.openweathermap.org/data/2.5/weather?zip=" + zip + ",us&APPID=d1b6322ad23b38c5b2a7a5b787ed10ab";
-      if (superZip.length > 5) {
-        console.error("Zip Code must be 5 digits long!");
-        $("#zipcode-alert").show().fadeOut(3000);
-        return false;
-      }
-
-
+    // var searchUrl = "http://api.openweathermap.org/data/2.5/weather?zip=" + zip + ",us&APPID=d1b6322ad23b38c5b2a7a5b787ed10ab";
+    var searchUrl = "http://api.openweathermap.org/data/2.5/weather?zip=80301,us&APPID=d1b6322ad23b38c5b2a7a5b787ed10ab";
+    $("button").click(function() {
       $.getJSON(searchUrl, function(result) {
+        var html = '';
         //convert 10 digit json date/time for readable format
         // Create a new JavaScript Date object based on the timestamp
         // multiplied by 1000 so that the argument is in milliseconds, not seconds.
         var date = new Date(result.dt * 1000);
+
         var sunrise = new Date(result.sys.sunrise * 1000);
         var sunset = new Date(result.sys.sunset * 1000);
+        console.log(sunrise.getHours() + ":" + sunrise.getMinutes());
 
+        //var sunset = (result.sys.sunset * 1000);
+        //sunset = console.log(sunset.getHours());
         // convert text string that does not have first characters as capitals
         var skyCondition = toTitleCase(result.weather[0].description);
 
         //convert Kelvin temperture to Fahrenheit
-        var fahrenheit = 1.8 * (result.main.temp - 273) + 32;
+        var temp1K = result.main.temp - 273;
+        var temp2K = temp1K * 1.8;
+        var fahrenheit = temp2K + 32;
         fahrenheit = parseFloat(fahrenheit).toFixed(0);
 
         // convert millibars of pressure to inches of pressure
@@ -73,9 +60,19 @@
         wind = parseFloat(result.wind.speed).toFixed(0);
         windDirection = parseFloat(result.wind.deg).toFixed(0);
 
+        // put together HTML output
+
+
+
+        html += '<nav class="navbar navbar-light bg-light justify-content-between">';
+        html += '<a class="navbar-brand">Weather Search Site</a>';
+        html += '<form class="form-inline">';
+        html += '<input class="form-control mr-sm-2" type="search" placeholder="Enter US Zip Code" aria-label="Search">';
+        html += '<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>';
+        html += '</form>';
+        html += '</nav>';
 
         html += '<div class="jumbotron">';
-        html += '</br>';
         html += '<h1>Location:  ' + result.name + '</h1></br>';
 
         html += '<div class="details">';
@@ -84,26 +81,22 @@
         html += '<b>Temp :  ' + '</b>' + fahrenheit + '</b><br>';
         html += '<b>Humidity :  ' + '</b>' + result.main.humidity + '<br>';
         html += '<b>Pressure :  ' + '</b>' + pressure + '<br><br>';
+        html += '<b>Humidity :  ' + '</b>' + result.main.humidity + '<br><br>';
         html += '<b>Wind :  ' + '</b>' + wind + '</b><br>';
         html += '<b>Wind Direction:  ' + '</b>' + windDirection + '<br><br>';
         html += '<b>Sunrise:  ' + '</b>' + sunrise.getHours() + ":" + sunrise.getMinutes() + '<br>';
         html += '<b>Sunset :  ' + '</b>' + sunset.getHours() + ":" + sunset.getMinutes() + '<br>';
-        html += '<br><br>';
         html += '</div>';
         html += '</div>';
-        $("#weatherdata").empty();
+        // html += '<ul>';
+        // result.list.map(function(d) {
+        //   html += '<li>The humidity on ' + d.dt_txt + ' was ' + d.main.humidity + '</li>';
+        // })
+        // html += '</ul>';
         $('#weatherdata').append(html);
-        console.log(result);
+        console.log(html, result);
       });
-    }
-
-    $("button").click(getWeathers);
-
-    $("input").on("keypress", function(e) {
-      if (e.keyCode === 13) {
-        getWeathers();
-      }
-    })
+    });
 
     // convert text string that does not have first characters as capitals
     function toTitleCase(str) {
@@ -112,7 +105,6 @@
       });
     }
   </script>
-
 </body>
 
 </html>
