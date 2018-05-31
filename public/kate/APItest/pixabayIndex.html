@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">
+    </script>
+  </head>
+  <body>
+    <h1>Hello World</h1>
+    <input type="text" name="search1" value="">
+    <input type="text" name="search2" value="">
+    <button id="srchButton" type="button" name="button"></button>
+    <div id="stuff">
+    </div>
+  </body>
+  <script type="text/javascript">
+    $('#srchButton').click(function() {
+      var s1 = $( "input[name='search1']").val();
+      var s2 = $( "input[name='search2']").val();
+      var searchUrl = 'https://pixabay.com/api/?key=9093956-3948e40c7da80da9daa6c8f4d&q=' + s1 + '+' + s2 + '&image_type=photo';
+      $.ajax({
+        url : searchUrl,
+        success : function(data) {
+           data.hits.map(function(v){
+             var html = '<img src="' + v.webformatURL + '" alt="">';
+             $("#stuff").append(html);
+           });
+        },
+        error : function(request,err) {
+            console.log(err)
+        }
+      });
+    })
+  </script>
+</html>

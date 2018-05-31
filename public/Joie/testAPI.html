@@ -1,57 +1,44 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Dumb Gender Binary Site</title>
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.min.js"
-      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-      crossorigin="anonymous">
-    </script>
-  </head>
-  <body>
-    <h1>Hello World</h1>
-    <img src='https://ih1.redbubble.net/image.193013631.0462/flat,1000x1000,075,f.jpg' width= "150" height="200">
-    <input type="text" name="search1" value="">
-    <button id="srchButton" type="button" name="button"></button>
-    <div id="stuff">
-    </div>
-  </body>
-  <script type="text/javascript">
-    $('#srchButton').click(function() {
-      var s1 = $( "input[name='search1']").val();
-      var searchUrl = 'https://gender-api.com/get?name=elizabeth&key=LEreGlZoMylsKHlJZC' + s1;
-      $.ajax({
-        url : searchUrl,
-        success : function(data) {
-           data.hits.map(function(v){
-             var html = '<img src="' + v.webformatURL + '" alt="">';
-             $("#stuff").append(html);
-             console.log(result);
-           });
-        },
-        error : function(request,err) {
-            console.log(err);
-        }
-      });
-    })
-  </script>
+
+<head>
+  <<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+</head>
+<nav class="navbar navbar-dark bg-dark">
+<div class="container-fluid>
+  <div class="navbar-header">
+    <a class="navbar-brand" href="/">Welcome!</a>
+  </div>
+  <ul class="nav navbar-nav" style="text-align: center">
+    <li class="active"><a href="/">Home</a></li>
+    &nbsp;
+    <li><a href="/claire">Claire</a></li>
+    &nbsp;
+    <li><a href="/Joie">Joie</a></li>
+    &nbsp;
+    <li><a href="/kate">Kate</a></li>
+    &nbsp;
+    <li><a href="/scott">Scott</a></li>
+    &nbsp;
+    <li><a href="/tyler">Tyler</a></li>
+    &nbsp;
+  </ul>
+</div>
+<script src="index.js" charset="utf-8"></script>
+</nav>
+
+
+<body>
+  <input class="margin" type="text" name="search1" value="">
+  <button class="btn btn-success" name="findRhyme" id="clickMe" type="button">Rhyme Time!</button>
+
+</body>
+<script src="index.js"></script>
+
+
+
+
 </html>
-<!-- <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Gender Binary Test</title>
-  </head>
-  <body>
-    <h1>Welcome to the End</h1>
-    <input type="text" name="search1" value="">
-    <button id="srchButton" type="button" name="button"></button>
-  </body>
-  <script>
-    $.ajax({
-      url:"https://gender-api.com/get?name=elizabeth&key=LEreGlZoMylsKHlJZC",
-      type: "POST"
-    });
-  </script>
-</html> -->

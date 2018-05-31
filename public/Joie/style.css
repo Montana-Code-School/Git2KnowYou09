@@ -1,3 +1,15 @@
 body {
-  background-color: green;
+  background-color: gray;
 }
+h1 {
+  color: purple;
+  font-size: 50px;
+  font-style: italic;
+}
+.navbar-nav {
+  flex-direction: row;
+  word-spacing: 75px;
+}
+.margin {
+   margin-left: 5px;
+ }

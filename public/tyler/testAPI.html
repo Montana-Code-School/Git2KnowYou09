@@ -1,40 +1,75 @@
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.min.js"
-      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-      crossorigin="anonymous">
-    </script>
-  </head>
-  <body>
-    <h1>Hello World</h1>
-    <input type="text" name="search1" value="">
-    <input type="text" name="search2" value="">
-    <button id="srchButton" type="button" name="button"></button>
-    <div id="stuff">
-    </div>
-  </body>
-  <script type="text/javascript">
-    $('#srchButton').click(function() {
-      var s1 = $( "input[name='search1']").val();
-      var s2 = $( "input[name='search2']").val();
-      var searchUrl = 'https://pixabay.com/api/?key=<<Get your own>>&q=' + s1 + '+' + s2 + '&image_type=photo';
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+  </script>
+</head>
+
+<body>
+  <h1>Hello World</h1>
+  <input type="text" name="search1" value="">
+  <select class="" name="category">
+    <option value="planets">planets</option>
+    <option value="people">people</option>
+    <option value="vehicles">vehicles</option>
+    <option value="starships">starships</option>
+  </select>
+  <button id="srchButton" type="button" name="button"></button>
+  <div id="stuff">
+  </div>
+</body>
+<script type="text/javascript">
+  var searchUrl = "https://swapi.co/api/";
+  var currentlySelectedField = '';
+  var searchTestUrl = "https://swapi.co/api/planets/1/2/";
+
+
+
+  $("select[name='category']").on("change", function(e){
+    searchUrl = "https://swapi.co/api/";
+    currentlySelectedField = e.currentTarget.value
+    searchUrl += currentlySelectedField;
+  });
+
+  $('#srchButton').click(function() {
+      var s1 = $("input[name='search1']").val();
+      if(searchUrl.indexOf('/') === 6) {
+        var count = 0;
+        for(var i = 0; i < searchUrl.length; i++){
+          if(searchUrl[i] === '/'){
+            count++;
+            if(count >= 5) {
+              searchUrl = searchUrl.slice(0, i);
+              break;
+            }
+          }
+        }
+      }
+      searchUrl += '/' + s1;
+
       $.ajax({
-        url : searchUrl,
-        success : function(data) {
-           data.hits.map(function(v){
-             var html = '<img src="' + v.webformatURL + '" alt="">';
-             $("#stuff").append(html);
-           });
+        beforeSend: function(request) {
+          request.setRequestHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+          request.setRequestHeader("Access-Control-Allow-Headers", "*");
         },
-        error : function(request,err) {
-            console.log(err)
+        url: searchUrl,
+        success: function(data) {
+          console.log(data)
+          // data.hits.map(function(v) {
+          //   var html = '<img src="' + v.webformatURL + '" alt="">';
+          //   $("#stuff").append(html);
+          // });
+        },
+        error: function(err) {
+          if(err.status === 404) {
+             console.error("There is no " + currentlySelectedField + " With this id.");
+          }
         }
       });
-    })
-  </script>
+  });
+</script>
+
 </html>
