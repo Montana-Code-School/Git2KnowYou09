@@ -1,0 +1,34 @@
+.jumbotron {
+  background-color: red;
+}
+
+#kanjiHeading {
+  background-color: #990000;
+
+}
+
+#kanjiLookupParagraph {
+  color: #EBEBEB;
+}
+
+#kanjiLookup {
+  color: #EBEBEB;
+}
+
+.container-fluid {
+  padding-bottom:30px;
+}
+
+.btn-group {
+  margin-top: 20px;
+  position: relative;
+}
+
+body {
+  padding-top: 30px;
+  /* background-image: url("https://lh3.googleusercontent.com/12TTKmcWL4Pgiwdmg3jwR_r8LmlNyxvU71nGOI5bI6TR0E9xr_YMcxtCl0m6w8AAsBXPOesZrk1k8R3clbCJitbIx8l4L7BK4HeD84DV9sJBnp4zYgEFJTbSy_StkjvQvvfhUqBAXsb11f-D8cPk9NasR5S8Lh5LwTck4T_no5GOIFXFVy-Afd5yynbEmoXRKacG6qFR6f1Co21LA1gxPl6WBVkXMGF4OvpWLwQG0TPCCt2GFqr5DC4-sTr3QDtqRoQozISN0gS7IWxFwkkPI8ypCFqvcpEMFkoW6ZEjPcI35ch70o0qxSU3joPE_1FhT7y2iX9iy8FGHBlBVaI_FO0cq1FtCcr6vLL3GVXv48gp2UuAOms9Y3gRHBKFI3_mQ41hw9Tx37jkOktAcw8F0S63ih-6bBGtHpHw6ECWw-tCrd2sjzce74BTalMoxkEUPOkUt_IHRcHL6ns-juWX16fuYroACjzVWJT8V3ki-ScoJUYt6R6jEkGz3mWykRwEsPx2m_G3W2N400bWVC7tg679OyZAREJU9CL9ASW5MLHgre9tM5kQqKc-eDoJKsYStTdtqdwkKuelKOYAUe7tJZUpO48AbyxNK184soI=w1168-h872-no");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; */
+}
